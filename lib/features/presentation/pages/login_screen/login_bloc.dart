@@ -27,12 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       var userLoggedIn= await _localDataSource.loginUser(
            event.email, event.password);
       print(userLoggedIn);
-      if(userLoggedIn==false){
-        Fluttertoast.showToast(
-            msg: "Invalid Credential !!",
-            gravity: ToastGravity.CENTER,
-            backgroundColor: AppColors.vd_dark_accent_border);
-      }
+
       yield LoginLoadedState(isLoggedIn: userLoggedIn);
     } else if (event is StoreAuthTokenEvent) {
       print(event.authToken);
