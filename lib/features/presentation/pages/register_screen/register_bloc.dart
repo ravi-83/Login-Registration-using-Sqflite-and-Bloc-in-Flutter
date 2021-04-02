@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:login_registration_app/core/utils/constants.dart';
 import 'package:login_registration_app/features/data/datasources/local_data_source.dart';
 import 'package:login_registration_app/features/data/models/user_model.dart';
 
@@ -22,13 +24,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> mapEventToState(
     RegisterEvent event,
   ) async* {
-    if(event is CheckUserIsRegisteredEvent){
-      var shouldLogin= await _localDataSource.shouldRegister(event.email, event.password);
+    if (event is CheckUserIsRegisteredEvent) {
+      var shouldLogin =
+          await _localDataSource.shouldRegister(event.email, event.password);
       yield ShouldRegisterState(shouldRegister: shouldLogin);
-    }else if(event is RegisterUserEvent){
-      var isRegistered = await _localDataSource.saveUserProfile(event.name, event.email, event.password);
+    } else if (event is RegisterUserEvent) {
+      var isRegistered = await _localDataSource.saveUserProfile(
+          event.name, event.email, event.password);
       yield RegisterLoadedState(isRegistered: isRegistered);
-    }else if(event is StoreAuthTokenEvent){
+    } else if (event is StoreAuthTokenEvent) {
       _localDataSource.saveAccessToken(event.authToken);
       print("Auth token stored");
       yield RegisterLoadedState(isAuthTokenStored: true);

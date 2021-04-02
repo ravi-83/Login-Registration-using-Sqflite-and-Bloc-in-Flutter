@@ -1,7 +1,6 @@
 part of 'login_bloc.dart';
-
-abstract class LoginEvent extends Equatable {
-  const LoginEvent();
+@immutable
+abstract class LoginEvent  {
 }
 
 class LoginUserEvent extends LoginEvent{
@@ -10,17 +9,13 @@ class LoginUserEvent extends LoginEvent{
 
   LoginUserEvent({this.email, this.password});
 
-  @override
-  List<Object> get props => [email,password];
-
 }
 
 class StoreAuthTokenEvent extends LoginEvent{
   final String authToken;
 
   StoreAuthTokenEvent({this.authToken});
-  @override
-  List<Object> get props => [authToken];
+
 
 }
 

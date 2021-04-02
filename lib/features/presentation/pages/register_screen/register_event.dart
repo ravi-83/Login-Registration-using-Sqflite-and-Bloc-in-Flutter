@@ -1,7 +1,8 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterEvent extends Equatable {
-  const RegisterEvent();
+@immutable
+abstract class RegisterEvent {
+
 }
 
 class CheckUserIsRegisteredEvent extends RegisterEvent{
@@ -9,8 +10,7 @@ class CheckUserIsRegisteredEvent extends RegisterEvent{
   final String password;
 
   CheckUserIsRegisteredEvent({this.email, this.password});
-  @override
-  List<Object> get props => [email,password];
+
 
 }
 
@@ -21,8 +21,7 @@ class RegisterUserEvent extends RegisterEvent{
 
   RegisterUserEvent({this.name, this.email, this.password});
 
-  @override
-  List<Object> get props => [name,email,password];
+
 
 }
 

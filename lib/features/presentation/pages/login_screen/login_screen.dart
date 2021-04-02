@@ -33,18 +33,23 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is LoginLoadedState) {
-            if (state.isLoggedIn !=null && state.isLoggedIn) {
-              BlocProvider.of<LoginBloc>(context).add(
-                StoreAuthTokenEvent(authToken: _emailController.text),
-              );
+            print("hello");
+            if (state.isLoggedIn !=null ) {
+              print("hello");
+              if(state.isLoggedIn==true){
+                BlocProvider.of<LoginBloc>(context).add(
+                  StoreAuthTokenEvent(authToken: _emailController.text),
+                );
+              }else{
+                Fluttertoast.showToast(
+                    msg: "Invalid Credential !!",
+                    gravity: ToastGravity.CENTER,
+                    backgroundColor: AppColors.vd_dark_accent_border);
+                _doClearControllerText();
+              }
+
             } else if (state.isAuthTokenStored != null && state.isAuthTokenStored) {
               Navigation.intentWithClearAllRoutes(context, AppRoute.home);
-            } else if (!state.isLoggedIn) {
-              Fluttertoast.showToast(
-                  msg: "Invalid Credential !!",
-                  gravity: ToastGravity.CENTER,
-                  backgroundColor: AppColors.vd_dark_accent_border);
-              _doClearControllerText();
             }
           }
         },
