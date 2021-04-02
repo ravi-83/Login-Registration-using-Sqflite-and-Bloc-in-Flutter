@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:login_registration_app/core/config/db_provider.dart';
 import 'package:login_registration_app/core/config/my_shared_pref.dart';
-import 'package:login_registration_app/features/clean/data/models/user_model.dart';
+import 'package:login_registration_app/features/data/models/user_model.dart';
 
 abstract class LocalDataSource{
   void saveAccessToken(String accessToken);

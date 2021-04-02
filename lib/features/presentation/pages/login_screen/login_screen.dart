@@ -6,7 +6,7 @@ import 'package:login_registration_app/core/utils/constants.dart';
 import 'package:login_registration_app/core/utils/routes.dart';
 import 'package:login_registration_app/core/widgets/rounded_button_widget.dart';
 import 'package:login_registration_app/core/widgets/text_form_field_widget.dart';
-import 'package:login_registration_app/features/clean/presentation/pages/login_screen/login_bloc.dart';
+import 'package:login_registration_app/features/presentation/pages/login_screen/login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -44,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   msg: "Invalid Credential !!",
                   gravity: ToastGravity.CENTER,
                   backgroundColor: AppColors.vd_dark_accent_border);
+              _doClearControllerText();
             }
           }
         },
@@ -133,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _emailController,
                 callBack: (value) {
                   if (!value.contains('@')) {
-                    return 'Email not found';
+                    return 'Enter a Valid Email';
                   }
                   return null;
                 },
@@ -150,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               TextFormFieldWidget(
+                obscureText: true,
                 controller: _passwordController,
                 callBack: (value) {
                   if (value.length < 5) {
@@ -189,5 +191,17 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ],
     );
+  }
+
+  _doClearControllerText(){
+    _passwordController.clear();
+    _emailController.clear();
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _emailController.dispose();
+    super.dispose();
   }
 }

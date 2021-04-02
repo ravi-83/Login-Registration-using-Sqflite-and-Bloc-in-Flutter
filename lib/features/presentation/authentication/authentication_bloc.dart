@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:login_registration_app/features/clean/data/datasources/local_data_source.dart';
-import 'package:login_registration_app/features/clean/data/models/user_model.dart';
+import 'package:login_registration_app/features/data/datasources/local_data_source.dart';
+import 'package:login_registration_app/features/data/models/user_model.dart';
 
 part 'authentication_event.dart';
 

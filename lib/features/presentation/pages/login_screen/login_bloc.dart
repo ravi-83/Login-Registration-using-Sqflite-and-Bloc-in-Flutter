@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:login_registration_app/features/clean/data/datasources/local_data_source.dart';
+import 'package:login_registration_app/features/data/datasources/local_data_source.dart';
 
 part 'login_event.dart';
 

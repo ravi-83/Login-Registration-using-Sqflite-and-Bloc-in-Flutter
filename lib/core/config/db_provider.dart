@@ -1,4 +1,4 @@
-import 'package:login_registration_app/features/clean/data/models/user_model.dart';
+import 'package:login_registration_app/features/data/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../utils/constants.dart';

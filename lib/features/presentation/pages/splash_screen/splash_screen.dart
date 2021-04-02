@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:async';
 import 'package:login_registration_app/core/config/navigation.dart';
 import 'package:login_registration_app/core/utils/routes.dart';
-import 'package:login_registration_app/features/clean/presentation/authentication/authentication_bloc.dart';
+import 'package:login_registration_app/features/presentation/authentication/authentication_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

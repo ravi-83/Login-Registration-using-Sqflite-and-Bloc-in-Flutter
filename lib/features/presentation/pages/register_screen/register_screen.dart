@@ -6,7 +6,7 @@ import 'package:login_registration_app/core/utils/constants.dart';
 import 'package:login_registration_app/core/utils/routes.dart';
 import 'package:login_registration_app/core/widgets/rounded_button_widget.dart';
 import 'package:login_registration_app/core/widgets/text_form_field_widget.dart';
-import 'package:login_registration_app/features/clean/presentation/pages/register_screen/register_bloc.dart';
+import 'package:login_registration_app/features/presentation/pages/register_screen/register_bloc.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -14,10 +14,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController _nameText = TextEditingController();
-  TextEditingController _emailText = TextEditingController();
-  TextEditingController _passwordText = TextEditingController();
-  TextEditingController _conformationPass = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _conformationController = TextEditingController();
 
   String name;
   String email;
@@ -26,6 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _key = GlobalKey<FormState>();
   DateTime currentBackPressTime;
+
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
@@ -42,39 +43,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: BlocConsumer<RegisterBloc, RegisterState>(
-          listener: (context, state) {
-            if (state is RegisterLoadingState) {
-            } else if (state is RegisterLoadedState) {
-              if (state.isRegistered !=null && state.isRegistered) {
-                BlocProvider.of<RegisterBloc>(context).add(
-                  StoreAuthTokenEvent(authToken: _emailText.text),
-                );
-              } else if (state.isAuthTokenStored !=null && state.isAuthTokenStored) {
-                Navigation.intentWithClearAllRoutes(context, AppRoute.home);
-              }
-            } else if (state is ShouldRegisterState) {
-              if (state.shouldRegister) {
-                BlocProvider.of<RegisterBloc>(context).add(
-                  RegisterUserEvent(
-                    name: _nameText.text,
-                    email: _emailText.text,
-                    password: _passwordText.text,
-                  ),
-                );
-              }else if (!state.shouldRegister) {
-                Fluttertoast.showToast(
-                    msg: "Invalid Credential !!",
-                    gravity: ToastGravity.CENTER,
-                    backgroundColor: AppColors.vd_dark_accent_border);
-              }
+      backgroundColor: Colors.white,
+      body: BlocConsumer<RegisterBloc, RegisterState>(
+        listener: (context, state) {
+          if (state is RegisterLoadingState) {
+          } else if (state is RegisterLoadedState) {
+            if (state.isRegistered != null && state.isRegistered) {
+              BlocProvider.of<RegisterBloc>(context).add(
+                StoreAuthTokenEvent(authToken: _emailController.text),
+              );
+            } else if (state.isAuthTokenStored != null &&
+                state.isAuthTokenStored) {
+              Navigation.intentWithClearAllRoutes(context, AppRoute.home);
             }
-          },
-          builder: (context, state) {
-            return _getBody();
-          },
-        ));
+          } else if (state is ShouldRegisterState) {
+            if (state.shouldRegister) {
+              BlocProvider.of<RegisterBloc>(context).add(
+                RegisterUserEvent(
+                  name: _nameController.text,
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                ),
+              );
+            } else if (!state.shouldRegister) {
+              Fluttertoast.showToast(
+                  msg: "Email Already in Use !!",
+                  gravity: ToastGravity.CENTER,
+                  backgroundColor: AppColors.vd_dark_accent_border);
+              _doClearControllerText();
+            }
+          }
+        },
+        builder: (context, state) {
+          return _getBody();
+        },
+      ),
+    );
   }
 
   _getBody() {
@@ -110,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   _handleRegister() {
     if (_key.currentState.validate()) {
       BlocProvider.of<RegisterBloc>(context).add(CheckUserIsRegisteredEvent(
-          email: _emailText.text, password: _passwordText.text));
+          email: _emailController.text, password: _passwordController.text));
     }
   }
 
@@ -155,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               TextFormFieldWidget(
-                controller: _nameText,
+                controller: _nameController,
                 callBack: (value) {
                   if (value.isNotEmpty) {
                     return null;
@@ -175,7 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               TextFormFieldWidget(
-                controller: _emailText,
+                controller: _emailController,
                 hintText: 'you@example.com',
                 callBack: (value) {
                   if (!value.contains('@')) {
@@ -196,7 +200,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               TextFormFieldWidget(
-                controller: _passwordText,
+                obscureText: true,
+                controller: _passwordController,
                 callBack: (value) {
                   if (value.length < 5) {
                     return 'weak password';
@@ -216,9 +221,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               TextFormFieldWidget(
-                controller: _conformationPass,
+                obscureText: true,
+                controller: _conformationController,
                 callBack: (value) {
-                  if (value != _passwordText.text) {
+                  if (value != _passwordController.text) {
                     return 'Match the password properly';
                   }
                   return null;
@@ -256,4 +262,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ],
     );
   }
+
+  _doClearControllerText(){
+    _emailController.clear();
+    _passwordController.clear();
+    _nameController.clear();
+    _conformationController.clear();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+    _conformationController.dispose();
+    super.dispose();
+  }
+
 }

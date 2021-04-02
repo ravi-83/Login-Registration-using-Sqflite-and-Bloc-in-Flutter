@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_registration_app/core/utils/routes.dart';
-import 'package:login_registration_app/features/clean/presentation/authentication/authentication_bloc.dart';
-import 'package:login_registration_app/features/clean/presentation/pages/home_screen/home_screen.dart';
-import 'package:login_registration_app/features/clean/presentation/pages/login_screen/login_screen.dart';
-import 'package:login_registration_app/features/clean/presentation/pages/register_screen/register_bloc.dart';
-import 'package:login_registration_app/features/clean/presentation/pages/register_screen/register_screen.dart';
-import 'package:login_registration_app/features/clean/presentation/pages/splash_screen/splash_screen.dart';
+import 'package:login_registration_app/features/presentation/authentication/authentication_bloc.dart';
+import 'package:login_registration_app/features/presentation/pages/home_screen/home_screen.dart';
+import 'package:login_registration_app/features/presentation/pages/login_screen/login_screen.dart';
+import 'package:login_registration_app/features/presentation/pages/register_screen/register_bloc.dart';
+import 'package:login_registration_app/features/presentation/pages/register_screen/register_screen.dart';
+import 'package:login_registration_app/features/presentation/pages/splash_screen/splash_screen.dart';
 import 'package:login_registration_app/injection_container.dart';
 import 'core/utils/constants.dart';
-import 'features/clean/presentation/pages/login_screen/login_bloc.dart';
+import 'features/presentation/pages/login_screen/login_bloc.dart';
 import 'injection_container.dart' as di;
 
 void main() async {

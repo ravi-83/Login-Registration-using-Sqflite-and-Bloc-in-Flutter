@@ -4,8 +4,8 @@ import 'package:login_registration_app/core/config/navigation.dart';
 import 'package:login_registration_app/core/utils/constants.dart';
 import 'package:login_registration_app/core/utils/routes.dart';
 import 'package:login_registration_app/core/widgets/rounded_button_widget.dart';
-import 'package:login_registration_app/features/clean/data/models/user_model.dart';
-import 'package:login_registration_app/features/clean/presentation/authentication/authentication_bloc.dart';
+import 'package:login_registration_app/features/data/models/user_model.dart';
+import 'package:login_registration_app/features/presentation/authentication/authentication_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
