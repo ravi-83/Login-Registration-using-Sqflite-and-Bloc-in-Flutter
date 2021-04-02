@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
         delay: 500,
         child: RichText(
           text:TextSpan(
-            text: "Login &",
+            text: "Login & ",
             style: TextStyle(
               fontSize: 48,
 

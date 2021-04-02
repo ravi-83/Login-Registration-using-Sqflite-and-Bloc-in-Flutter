@@ -34,21 +34,21 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is LoginLoadedState) {
             print("hello");
-            if (state.isLoggedIn !=null ) {
+            if (state.isLoggedIn != null) {
               print("hello");
-              if(state.isLoggedIn==true){
+              if (state.isLoggedIn == true) {
                 BlocProvider.of<LoginBloc>(context).add(
                   StoreAuthTokenEvent(authToken: _emailController.text),
                 );
-              }else{
+              } else {
                 Fluttertoast.showToast(
                     msg: "Invalid Credential !!",
                     gravity: ToastGravity.CENTER,
                     backgroundColor: AppColors.vd_dark_accent_border);
                 _doClearControllerText();
               }
-
-            } else if (state.isAuthTokenStored != null && state.isAuthTokenStored) {
+            } else if (state.isAuthTokenStored != null &&
+                state.isAuthTokenStored) {
               Navigation.intentWithClearAllRoutes(context, AppRoute.home);
             }
           }
@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Here for the first time ? ',
+          'Don\'t have an account yet? ',
           style: TextStyle(
               color: Colors.black45, fontSize: 15, fontWeight: FontWeight.w600),
         ),
@@ -198,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  _doClearControllerText(){
+  _doClearControllerText() {
     _passwordController.clear();
     _emailController.clear();
   }
